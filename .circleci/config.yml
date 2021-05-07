@@ -10,14 +10,10 @@ workflows:
       - tf-plan-apply:
           requires:
             - build-and-test
-      - tf-apply:
-          requires:
-            - tf-plan-apply
           filters:
             branches:
               only:
                 - master
-
 
 jobs:
   build-and-test: 
@@ -79,21 +75,5 @@ jobs:
           command: |
             cd devops-example-25981-infra/terraform
             terraform init -input=false -backend-config="conn_str=$TF_STATE_DATABASE_URL"
-            terraform plan -var 'secret_key=$SECRET_KEY' -var 'heroku_acc_email=$HEROKU_EMAIL' -var 'heroku_api_key=$HEROKU_API_KEY' -out tfapply 
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-
-  tf-apply:
-    docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Terraform apply to create resources
-          command: |
-            ls
-            
-    
+            terraform apply -var 'secret_key=$SECRET_KEY' -var 'heroku_acc_email=$HEROKU_EMAIL' -var 'heroku_api_key=$HEROKU_API_KEY' -auto-approve
+               
