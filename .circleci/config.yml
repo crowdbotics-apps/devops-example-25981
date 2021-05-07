@@ -13,7 +13,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - test-repo-exist
 
 jobs:
   build-and-test: 
@@ -56,10 +56,10 @@ jobs:
           path: test-results
           destination: tr-artifacts
 
-      - run:
-          name: Build docker image
-          command: |
-            docker build --build-arg SECRET_KEY=${SECRET_KEY} -t ${DOCKER_USERNAME}/${IMAGE_NAME}:${TAG} .
+      # - run:
+      #     name: Build docker image
+      #     command: |
+      #       docker build --build-arg SECRET_KEY=${SECRET_KEY} -t ${DOCKER_USERNAME}/${IMAGE_NAME}:${TAG} .
       
   tf-plan-apply:
     docker:
@@ -70,6 +70,7 @@ jobs:
           name: Clone infrastructure repo
           command: |
             git clone https://github.com/mirr254/devops-example-25981-infra.git
+            ls
       - run: 
           name: Initialize TF and plan 
           command: |
