@@ -71,7 +71,7 @@ jobs:
           command: |
             git clone https://github.com/mirr254/devops-example-25981-infra.git
       - run: 
-          name: Initialize TF and plan
+          name: Initialize TF and plan 
           command: |
             cd devops-example-25981-infra/terraform
             terraform init -input=false -backend-config="conn_str=$TF_STATE_DATABASE_URL"
