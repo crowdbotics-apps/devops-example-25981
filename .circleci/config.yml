@@ -48,6 +48,7 @@ jobs:
       - run: 
           name: Run tests
           command: |
+            echo $CIRCLE_TAG
             . devopstest/bin/activate
             python3 manage.py test
       - store_test_results:
