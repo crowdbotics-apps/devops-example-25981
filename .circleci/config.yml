@@ -70,5 +70,5 @@ jobs:
           command: |
             cd devops-example-25981-infra/terraform
             terraform init -input=false -backend-config="conn_str=$TF_STATE_DATABASE_URL"
-            terraform apply -var 'secret_key=$SECRET_KEY' -var 'heroku_acc_email=$HEROKU_EMAIL' -var 'heroku_api_key=$HEROKU_API_KEY' --auto-approve
+            terraform apply -var secret_key=$SECRET_KEY -var 'heroku_acc_email=$HEROKU_EMAIL' -var 'heroku_api_key=$HEROKU_API_KEY' --auto-approve
                
