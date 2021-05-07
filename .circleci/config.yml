@@ -77,8 +77,8 @@ jobs:
       - run: 
           name: Initialize TF and plan
           command: |
-            cd devops-example-25981-infra
-            terraform apply init -input=false
+            cd devops-example-25981-infra/terraform
+            terraform init -input=false
             terraform plan -var 'secret_key=$SECRET_KEY' -var 'heroku_acc_email=$HEROKU_EMAIL' -var 'heroku_api_key=$HEROKU_API_KEY' -out tfapply 
       - persist_to_workspace:
           root: .
