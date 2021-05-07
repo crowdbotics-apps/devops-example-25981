@@ -56,12 +56,6 @@ jobs:
       - store_artifacts:
           path: test-results
           destination: tr-artifacts
-
-      # - run:
-      #     name: Build docker image
-      #     command: |
-      #       docker build --build-arg SECRET_KEY=${SECRET_KEY} -t ${DOCKER_USERNAME}/${IMAGE_NAME}:${TAG} .
-      
   tf-plan-apply:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
@@ -76,5 +70,5 @@ jobs:
           command: |
             cd devops-example-25981-infra/terraform
             terraform init -input=false -backend-config="conn_str=$TF_STATE_DATABASE_URL"
-            terraform plan -var 'secret_key=$SECRET_KEY' -var 'heroku_acc_email=$HEROKU_EMAIL' -var 'heroku_api_key=$HEROKU_API_KEY'
+            terraform apply -var 'secret_key=$SECRET_KEY' -var 'heroku_acc_email=$HEROKU_EMAIL' -var 'heroku_api_key=$HEROKU_API_KEY' --auto-approve
                
