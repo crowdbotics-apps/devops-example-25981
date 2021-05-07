@@ -13,7 +13,7 @@ workflows:
           filters:
             branches:
               only:
-                - test-repo-exist
+                - master
 
 jobs:
   build-and-test: 
